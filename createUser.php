@@ -9,14 +9,14 @@ if ($mysqli->connect_errno) {
 
 
 $username = $_POST["username"];
+$query ="INSERT INTO Users(user_id) VALUES(" .$username. ")";
 
-if($username != NULL || $username != "" || $username != "username"){
-  "INSERT INTO Users(user_id) VALUES(" .$username. ")";
-  echo "User successfully created";
-}
-else{
-  echo "Username invalid. User not created."
-}
+  if($mysqli->query($query)==true){
+    echo "User successfully created";
+  }
+  else {
+    echo "Username invalid, unable to create user";
+  }
 
 
 $mysqli->close();
