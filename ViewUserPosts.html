@@ -3,7 +3,8 @@
 <head>
 </head>
 <body>
-  <select name="users" onsubmit = "ViewUserPosts.php" method = "post">
+  <form name="users" onsubmit = "ViewUserPosts.php" method = "post">
+  <select>
 
     <?php
       $mysqli = new mysqli("mysql.eecs.ku.edu", "sseacat", "vZFhQCymmaDqpWvs", "sseacat");
@@ -17,7 +18,7 @@
 
       if($result = $mysqli->query($query)){
         while ($row = $result->fetch_assoc()) {
-              printf ("<option value= %s (%s)\n",". $row["user_id"] .">%s (%s)\n,  $row["user_id"]</option>");
+              printf ("<option value= %s (%s)\n" ,$row["user_id"]">%s (%s)\n",  $row["user_id"]"</option>");
         }
           $result->free();
       }
@@ -25,7 +26,8 @@
       $mysqli->close();
 
     ?>
+    </select>
     <input type=submit value="submit">
-  </select>
+</form>
 </body>
 </html>

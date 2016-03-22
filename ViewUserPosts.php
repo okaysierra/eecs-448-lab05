@@ -13,7 +13,7 @@
 
   if($result = $mysqli->query($query)){
     while ($row = $result->fetch_assoc()) {
-          printf ("%s (%s)\n", $row["Posts"]);
+          printf ("%s (%s)\n", $row["content"]);
       }
       $result->free();
   }
