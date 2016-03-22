@@ -7,29 +7,22 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-$username = $_POST["username"];
+
 $content = $_POST["body"];
+$username = $_POST["username"];
 
-$check = "SELECT user_id
-          FROM Users
-          WHERE user_id==". $username "";
 
-if($mysqli->query($check)==true)
-{
+$query ="INSERT INTO Posts (content, author_id) VALUES('$content', '$username')";
 
-  $query = "INSERT INTO Posts(content, author_id) VALUES(" . $content . "," . $body .")";
 
-  if($mysqli->query($query)==true) {
+  if($mysqli->query($query)===TRUE) {
     echo "Post successfully created.";
   }
   else{
-    echo "Post not created. Body is empty.";
+    echo "Post not created.";
   }
-}
-else{
-  echo "User not found. Post not created.";
-}
 
-mysqli->close();
+
+$mysqli->close();
 
 ?>
