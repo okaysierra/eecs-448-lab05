@@ -9,16 +9,25 @@ if ($mysqli->connect_errno) {
 
 
 $username = $_POST["username"];
-$query ="INSERT INTO Users(user_id) VALUES(" .$username. ")";
 
-  if($mysqli->query($query)==true){
+if($username == null || $username == "")
+{
+  echo "You must enter a username.";
+}
+else {
+
+$query ="INSERT INTO Users VALUES('$username')";
+
+  $success = $mysqli->query($query);
+
+  if($success==true){
     echo "User successfully created";
   }
   else {
-    echo "Username invalid, unable to create user";
+    echo "Username invalid, user already exists";
   }
 
-
+}
 $mysqli->close();
 
 ?>

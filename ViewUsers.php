@@ -7,11 +7,13 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
+echo "Current users <br><br>";
+
 $query = "SELECT user_id FROM Users ORDER by user_id";
 
 if($result = $mysqli->query($query)){
   while ($row = $result->fetch_assoc()) {
-        printf ("%s (%s)\n", $row["user_id"]);
+        printf ("%s \n<br>", $row["user_id"]);
     }
     $result->free();
 }
