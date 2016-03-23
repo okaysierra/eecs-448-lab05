@@ -3,31 +3,36 @@
 <head>
 </head>
 <body>
-  <form name="users" onsubmit = "ViewUserPosts.php" method = "post">
-  <select>
+  <?php
+  echo "<form name=usersf id=usersf action = ViewUserPosts.php method=post>";
+  echo "<select name=users form=usersf>";
 
-    <?php
+
       $mysqli = new mysqli("mysql.eecs.ku.edu", "sseacat", "vZFhQCymmaDqpWvs", "sseacat");
 
       if ($mysqli->connect_errno) {
           printf("Connect failed: %s\n", $mysqli->connect_error);
           exit();
       }
-
+      echo "<option value=Select User>Select User></option>";
       $query = "SELECT user_id FROM Users ORDER by user_id";
 
       if($result = $mysqli->query($query)){
         while ($row = $result->fetch_assoc()) {
-              printf ("<option value= %s (%s)\n" ,$row["user_id"]">%s (%s)\n",  $row["user_id"]"</option>");
+              printf ("<option value= %s\n >%s\n</option>", $row["user_id"], $row["user_id"]);
         }
           $result->free();
       }
 
       $mysqli->close();
 
-    ?>
-    </select>
-    <input type=submit value="submit">
-</form>
+
+    echo "</select>";
+
+
+    echo "<input type=submit value=submit>";
+    echo "</form>";
+
+?>
 </body>
 </html>

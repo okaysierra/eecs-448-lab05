@@ -6,14 +6,14 @@
       exit();
   }
 
-  $user = $_POST["users"];
+  $user = $_POST['users'];
 
-  $query = "SELECT content FROM Posts WHERE user_id=". $user ."";
+  $query = "SELECT content FROM Posts WHERE author_id= '$user'";
 
 
   if($result = $mysqli->query($query)){
     while ($row = $result->fetch_assoc()) {
-          printf ("%s (%s)\n", $row["content"]);
+          printf ("%s\n<br>", $row["content"]);
       }
       $result->free();
   }
