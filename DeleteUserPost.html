@@ -4,35 +4,38 @@
 </head>
 <body>
 
-<form name = "posts" action= "DeletePost.php" method = "post">
-<table>
   <?php
-    $mysqli = new mysqli("mysql.eecs.ku.edu", "sseacat", "vZFhQCymmaDqpWvs", "sseacat");
-
-    if ($mysqli->connect_errno) {
-        printf("Connect failed: %s\n", $mysqli->connect_error);
-        exit();
-    }
-    $query = "SELECT user_id, content, post_id FROM Posts";
+    echo "<form name=posts action=DeletePost.php method =post>";
 
 
-    if($result = $mysqli->query($query)){
-      while ($row = $result->fetch_assoc()) {
-            printf("<tr>");
-            printf("<td>%s (%s)\n", $row["user_id"] "</td>");
-            printf ("<td>%s (%s)\n", $row["content"] "</td>");
-            printf("<td><input type= checkbox  name=selectposts value = " $row["post_id"] "></td>");
-            printf("</tr>");
+      $mysqli = new mysqli("mysql.eecs.ku.edu", "sseacat", "vZFhQCymmaDqpWvs", "sseacat");
 
-        }
-        $result->free();
-    }
+      if ($mysqli->connect_errno) {
+          printf("Connect failed: %s\n", $mysqli->connect_error);
+          exit();
+      }
+      $query = "SELECT author_id, content, post_id FROM Posts";
 
-    $mysqli->close();
+      echo "<table>";
+      if($result = $mysqli->query($query)){
+        while ($row = $result->fetch_assoc()) {
+              echo "<tr>";
+              printf("<td>%s\n</td>", $row["author_id"]);
+              printf ("<td>%s\n</td>" , $row["content"]);
+              printf("<td><input type= checkbox  name=selectposts[] value=%s\n></td>", $row["post_id"]);
+              echo "</tr>";
 
-  ?>
-</table>
-  <input type=submit "value=submit">
-</form>
+          }
+          $result->free();
+      }
+      echo "</table>";
+      $mysqli->close();
+
+
+
+  echo "<input type=submit value=submit>";
+echo "</form>";
+?>
 </body>
+
 </html>
